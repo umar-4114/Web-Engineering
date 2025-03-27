@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Selector</title>
+</head>
+<body>
+
+    <h2>Select a Country:</h2>
+    <select id="countryDropdown" onchange="showCountryInfo()">
+        <option value="">-- Select a Country --</option>
+    </select>
+
+    <h3>Country Flag:</h3>
+    <img id="flagImage" src="" alt="Country Flag" width="200" style="display: none;">
+
+    <h3>Population:</h3>
+    <p id="populationText" style="display: none;"></p>
+
+    <script>
+        let countriesData = []; 
+
+        function loadCountries() {
+            fetch("https://restcountries.com/v3.1/all")
+                .then(response => response.json())
+                .then(data => {
+                    countriesData = data; 
+                    let dropdown = document.getElementById("countryDropdown");
+                    
+                    data.forEach(country => {
+                        let option = document.createElement("option");
+                        option.value = country.name.common;
+                        option.textContent = country.name.common;
+                        dropdown.appendChild(option);
+                    });
+                })
+                .catch(error => console.log("Error:", error));
+        }
+
+        function showCountryInfo() {
+            let dropdown = document.getElementById("countryDropdown");
+            let selectedCountry = dropdown.value;
+
+            let flagImage = document.getElementById("flagImage");
+            let populationText = document.getElementById("populationText");
+
+            let country = countriesData.find(c => c.name.common === selectedCountry);
+
+            if (country) {
+                flagImage.src = country.flags.png;
+                flagImage.style.display = "block";
+
+                populationText.textContent = `Population: ${country.population.toLocaleString()}`;
+                populationText.style.display = "block";
+            } else {
+                flagImage.style.display = "none";
+                populationText.style.display = "none";
+            }
+        }
+        window.onload = loadCountries;
+    </script>
+
+</body>
+</html>
