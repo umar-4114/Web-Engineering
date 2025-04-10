@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Feedback Form</title>
+    <script>
+        function validateForm() {
+            const facultyName = document.getElementById('faculty_name').value.trim();
+            const subjectName = document.getElementById('subject_name').value;
+            const deliveryMethod = document.getElementById('delivery_method').value;
+            
+            if (facultyName === '') {
+                alert('Please enter faculty name');
+                return false;
+            }
+            
+            if (subjectName === '') {
+                alert('Please select subject name');
+                return false;
+            }
+            
+            if (deliveryMethod === '') {
+                alert('Please select content delivery method');
+                return false;
+            }
+            
+            const ratingFields = [
+                'punctuality', 'preparation', 'english_communication',
+                'clarity', 'real_world_applications', 'classroom_environment',
+                'student_interaction', 'delivery_method_rating'
+            ];
+            
+            for (const field of ratingFields) {
+                const value = document.getElementById(field).value;
+                if (value === '') {
+                    alert(`Please select a rating for ${field.replace('_', ' ')}`);
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <h1>Pak-Austria </h1>
+    <h2>Department of Information Technology</h2>
+
+    <form method="post" action="process.php" onsubmit="return validateForm()">
+        <table border="1" cellpadding="5" cellspacing="0">
+            <tr>
+                <td>Name:</td>
+                <td><input type="text" id="student_name" name="student_name"></td>
+            </tr>
+            <tr>
+                <td>No.</td>
+                <td>Feedback Form</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>The faculty is <input type="text" id="faculty_name" name="faculty_name"></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Select the subject name 
+                    <select id="subject_name" name="subject_name">
+                        <option value="">-- Select --</option>
+                        <option value="CG">CG</option>
+                        <option value="DBMS">DBMS</option>
+                        <option value="OS">OS</option>
+                        <option value="DAA">DAA</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Please enter the topics covered <input type="text" id="topics_covered" name="topics_covered"></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Select the Content Delivery Method 
+                    <select id="delivery_method" name="delivery_method">
+                        <option value="">-- Select --</option>
+                        <option value="Presentation">Presentation</option>
+                        <option value="Blackboard">Blackboard</option>
+                        <option value="Interactive">Interactive</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">For the following questions enter the rating value (Rating factor: Excellent – 3, Good – 2, Poor – 1).</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>On-time to class 
+                    <select id="punctuality" name="punctuality">
+                        <option value="">-- Select --</option>
+                        <option value="3">3 (Excellent)</option>
+                        <option value="2">2 (Good)</option>
+                        <option value="1">1 (Poor)</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Well prepared for the class 
+                    <select id="preparation" name="preparation">
+                        <option value="">-- Select --</option>
+                        <option value="3">3 (Excellent)</option>
+                        <option value="2">2 (Good)</option>
+                        <option value="1">1 (Poor)</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>Communicates only in English 
+                    <select id="english_communication" name="english_communication">
+                        <option value="">-- Select --</option>
+                        <option value="3">3 (Excellent)</option>
+                        <option value="2">2 (Good)</option>
+                        <option value="1">1 (Poor)</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>Explains the topics clearly 
+                    <select id="clarity" name="clarity">
+                        <option value="">-- Select --</option>
+                        <option value="3">3 (Excellent)</option>
+                        <option value="2">2 (Good)</option>
+                        <option value="1">1 (Poor)</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>Integrate the topics with real-world applications 
+                    <select id="real_world_applications" name="real_world_applications">
+                        <option value="">-- Select --</option>
+                        <option value="3">3 (Excellent)</option>
+                        <option value="2">2 (Good)</option>
+                        <option value="1">1 (Poor)</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>Makes the classroom very lively and interesting 
+                    <select id="classroom_environment" name="classroom_environment">
+                        <option value="">-- Select --</option>
+                        <option value="3">3 (Excellent)</option>
+                        <option value="2">2 (Good)</option>
+                        <option value="1">1 (Poor)</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>Interaction with the students 
+                    <select id="student_interaction" name="student_interaction">
+                        <option value="">-- Select --</option>
+                        <option value="3">3 (Excellent)</option>
+                        <option value="2">2 (Good)</option>
+                        <option value="1">1 (Poor)</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>Your experience with the content delivery method 
+                    <select id="delivery_method_rating" name="delivery_method_rating">
+                        <option value="">-- Select --</option>
+                        <option value="3">3 (Excellent)</option>
+                        <option value="2">2 (Good)</option>
+                        <option value="1">1 (Poor)</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
